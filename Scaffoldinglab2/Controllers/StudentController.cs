@@ -64,6 +64,7 @@ namespace Scaffoldinglab2.Controllers
             catch (Exception ex)
             {
                 TempData["error"] = "Error dont aplicible";
+                Console.WriteLine(ex.Message);
                 return View(obj);
             }
         }
