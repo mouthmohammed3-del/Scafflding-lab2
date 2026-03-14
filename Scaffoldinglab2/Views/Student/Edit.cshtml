@@ -13,7 +13,7 @@
         <div class="card-body p-4">
 
             <form asp-action="Edit" method="post">
-
+                <input type="hidden" asp-for="IsActive" />
                 <!-- ID -->
                 @*    <div class="mb-3">
                 <label asp-for="Id" class="form-label"></label>

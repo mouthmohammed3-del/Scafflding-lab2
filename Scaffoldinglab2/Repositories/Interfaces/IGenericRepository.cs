@@ -1,6 +1,14 @@
 ﻿namespace Scaffoldinglab2.Repositories.Interfaces
 {
-    public interface IGenericRepository 
+    public interface IGenericRepository<T> 
     {
-    }
+        T Add(T entity);
+        T Update (T entity);
+       bool Delete (T entity);
+        T GetById (int id);
+       
+        IEnumerable<T> GetAll();
+      
+        
+    } 
 }

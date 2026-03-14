@@ -3,23 +3,31 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Scaffoldinglab2.Data;
 using Scaffoldinglab2.Models;
+using Scaffoldinglab2.Repositories.Interfaces;
 
 namespace Scaffoldinglab2.Controllers
 {
     public class StudentController : Controller
     {
-        private readonly dblab2DbContext context;
+        private readonly IRepositoryManager repository;
 
-        public StudentController(dblab2DbContext context)
+
+
+
+        //private readonly dblab2DbContext context;
+
+        public StudentController(IRepositoryManager repository )
         {
-            this.context = context;
+            this.repository = repository;
+
+            //this.context = context;
         }
         // GET: StudentController
         public ActionResult Index()
         {
-            var slist = context.Students;
+            //var slist = context.Students;
 
-            return View(slist);
+            return View(repository.StudentRepository.GetAll());
 
         }
 
@@ -44,8 +52,8 @@ namespace Scaffoldinglab2.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    context.Students.Add(obj);
-                    context.SaveChanges();
+                    repository.StudentRepository.Add(obj);
+                    repository.unitOfwork.saveChanges();
                     TempData["msg"] = "the add sucssed ";
 
                     return RedirectToAction(nameof(Index));
@@ -78,13 +86,13 @@ namespace Scaffoldinglab2.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            var student = context.Students.FirstOrDefault(s => s.Id == id);
+            var student = repository.StudentRepository.GetById(id);
             if (student == null)
             {
                 TempData["error"] = "mast be have not null ";
                 return RedirectToAction(nameof(Index));
             }
-            ViewBag.Teachers = context.Teachers.ToList();
+            //ViewBag.Teachers = context.Teachers.ToList();
 
             return View(student);
         }
@@ -98,11 +106,10 @@ namespace Scaffoldinglab2.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var res = context.Students.Update(obj);
-                    if (res.State == EntityState.Modified)
+                    var res = repository.StudentRepository.Update(obj);
+                    if (res != null)
                     {
-                        context.Students.Update(obj);
-                        context.SaveChanges();
+                       repository.unitOfwork.saveChanges();
                         TempData["msg"] = "the Updated sucssed ";
 
                         return RedirectToAction(nameof(Index));
@@ -138,13 +145,13 @@ namespace Scaffoldinglab2.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            var itme = context.Students.FirstOrDefault(s => s.Id == id);
+            var itme = repository.StudentRepository.GetById(id);  
             if (itme == null)
             {
                 TempData["error"] = "mast be have not null ";
                 return RedirectToAction(nameof(Index));
             }
-            ViewBag.Teachers = context.Teachers.ToList();
+           // ViewBag.Teachers = context.Teachers.ToList();
 
             return View(itme);
         }
@@ -158,11 +165,11 @@ namespace Scaffoldinglab2.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var res = context.Students.Remove(obj);
-                    if (res.State == EntityState.Deleted)
+                    var res = repository.StudentRepository.Delete(obj);
+                    if (res)
                     {
 
-                        context.SaveChanges();
+                        repository.unitOfwork.saveChanges();
                         TempData["msg"] = "the deleted is sucssed ";
 
                         return RedirectToAction(nameof(Index));
@@ -186,6 +193,37 @@ namespace Scaffoldinglab2.Controllers
                 TempData["error"] = ex.Message;
 
                 return View(obj);
+            }
+        }
+        public ActionResult ChangeState(int id,int state)
+        {
+            try
+            {
+                if (id == 0)
+                {
+                    TempData["error"] = "mast be have number of student ";
+                    return RedirectToAction(nameof(Index));
+                }
+
+                var item = repository.StudentRepository.GetById(id);
+                if (item == null)
+                {
+                   
+
+                    TempData["error"] = "mast be have not null ";
+                    return RedirectToAction(nameof(Index));
+                }
+               // ViewBag.Teachers = context.Teachers.ToList();
+                item.IsActive = state == 1 ? true : false;
+                repository.unitOfwork.saveChanges();
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception )
+            {
+                TempData["error"] = "خطاء غير متوقع ";
+
+                return RedirectToAction(nameof(Index));
             }
         }
     }

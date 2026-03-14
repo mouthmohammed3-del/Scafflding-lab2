@@ -22,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repositories\Implementations\" />
     <Folder Include="Scaffoldinglab2\" />
   </ItemGroup>
 

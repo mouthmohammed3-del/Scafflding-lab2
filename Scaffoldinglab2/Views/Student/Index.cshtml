@@ -23,6 +23,8 @@
                             <th>ID</th>
                             <th>Name</th>
                             <th>Age</th>
+                            <th>status</th>
+                            
                             <th width="250">Actions</th>
                         </tr>
                     </thead>
@@ -34,6 +36,21 @@
                                 <td>@item.Id</td>
                                 <td>@item.Name</td>
                                 <td>@item.Age</td>
+                                @if(item.IsActive != null)
+                                {
+                                    @if(item.IsActive == false)
+                                    {
+                                        <td>stoped</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Active</td>
+                                    }
+                                }
+                                else
+                                {
+                                    <td>-----</td>
+                                }
                                 <td>
                                     <a asp-action="Edit" asp-route-id="@item.Id"
                                        class="btn btn-sm btn-primary me-2">
@@ -45,10 +62,32 @@
                                         <i class="bi bi-trash"></i> Delete
                                     </a>
 
-                                    <a asp-action="Details" asp-route-id="@item.Id"
-                                       class="btn btn-sm btn-warning text-white">
-                                        <i class="bi bi-eye"></i> View
-                                    </a>
+                                    @if (item.IsActive != null)
+                                    {
+                                        @if (item.IsActive == false)
+                                        {
+                                            <a asp-action="ChangeState" asp-route-id="@item.Id"
+                                            asp-route-state="1"
+                                               class="btn btn-sm btn-success text-white">
+                                                <i class="bi bi-eye"></i> Activate
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a asp-action="ChangeState" asp-route-id="@item.Id"
+                                              asp-route-state="0"
+                                               class="btn btn-sm btn-warning text-white">
+                                                <i class="bi bi-eye"></i> stop
+                                            </a>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <a asp-action="ChangeState" asp-route-id="@item.Id" asp-route-state="1"
+                                           class="btn btn-sm btn-success text-white">
+                                            <i class="bi bi-eye"></i> Activate  
+                                        </a>    
+                                    }
                                 </td>
                             </tr>
                         }
