@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Scaffoldinglab2.Data;
 using Scaffoldinglab2.Models;
@@ -8,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<dblab2DbContext>(
     options => options.UseSqlServer(builder.Configuration.GetConnectionString("local")));
+builder.Services.AddIdentity<SysUser,IdentityRole>().AddEntityFrameworkStores<dblab2DbContext>();
 
 //=====================Repositories===============
 builder.Services.AddScoped<IStudentRepository,StudentRepository>();
@@ -29,6 +31,8 @@ if (!app.Environment.IsDevelopment())
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

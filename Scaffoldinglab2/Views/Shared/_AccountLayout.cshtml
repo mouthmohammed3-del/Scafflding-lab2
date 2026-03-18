@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ScaffoldingLab</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        .wrapper {
+            display: flex;
+        }
+
+        .navbar-toggler-icon     {
+            width: 70px; /* Sidebar مصغر بشكل افتراضي */
+            height: 100vh;
+            background: #343a40;
+            color: white;
+            position: fixed;
+            width: 100px;
+            overflow: hidden;
+
+        }
+
+           /* .navbar-toggler-icon:active {
+                width: 230px; /* يكبر عند المرور */
+            }*/
+
+        .navbar-toggler-icon h4 {
+                padding: 10px;
+                text-align: center;
+                border-bottom: 1px solid #495057;
+                opacity: 0;
+                transition: opacity 0.3s;
+            }
+
+            .navbar-toggler-icon:hover h4 {
+                opacity: 1;
+            }
+
+        .navbar-toggler-icon a {
+                display: block;
+                padding: 12px 20px;
+                color: #ced4da;
+                text-decoration: none;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+                .navbar-toggler-icon a:hover {
+                    background: #495057;
+                    color: white;
+                }
+
+        .content {
+            margin-left: 70px;
+            padding: 25px;
+            width: 100%;
+            transition: margin-left 0.3s;
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+
+        /*.sidebar:hover ~ .content {
+            margin-left: 230px; /* المحتوى يتحرك تلقائياً عند تكبير الـ Sidebar */
+        }*/
+
+        footer {
+            text-align: center;
+            padding: 50px;
+            color: gray;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+
+        <div class="navbar-toggler-icon">
+            <h6 class="card-header bg-primary text-white">ScaffoldingLab</h6>
+            <a asp-controller="Account" asp-action="Login">Login</a>
+            <a asp-controller="Account" asp-action="Register">Register</a>
+          
+        </div>
+
+        <div class="content">
+            <main role="main">
+                @RenderBody()
+            </main>
+            <footer>
+                © 2026 - ScaffoldingLab System
+            </footer>
+        </div>
+
+    </div>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

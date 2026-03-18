@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Scaffoldinglab2.Data;
@@ -7,6 +8,7 @@ using Scaffoldinglab2.Repositories.Interfaces;
 
 namespace Scaffoldinglab2.Controllers
 {
+    [Authorize]
     public class StudentController : Controller
     {
         private readonly IRepositoryManager repository;
@@ -23,6 +25,7 @@ namespace Scaffoldinglab2.Controllers
             //this.context = context;
         }
         // GET: StudentController
+        [AllowAnonymous]
         public ActionResult Index()
         {
             //var slist = context.Students;

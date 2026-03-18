@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Scaffoldinglab2.Data;
 
@@ -11,9 +12,11 @@ using Scaffoldinglab2.Data;
 namespace Scaffoldinglab2.Migrations
 {
     [DbContext(typeof(dblab2DbContext))]
-    partial class dblab2DbContextModelSnapshot : ModelSnapshot
+    [Migration("20260317210706_addIdintityModelsMgt")]
+    partial class addIdintityModelsMgt
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Scaffoldinglab2.Models;
 
 namespace Scaffoldinglab2.Data;
 
-public partial class dblab2DbContext : DbContext
+public partial class dblab2DbContext : IdentityDbContext<SysUser>
 {
     
 
@@ -23,6 +24,7 @@ public partial class dblab2DbContext : DbContext
   
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<Student>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Students__3214EC074026A7DE");
