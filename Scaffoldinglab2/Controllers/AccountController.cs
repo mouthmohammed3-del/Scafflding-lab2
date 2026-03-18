@@ -89,5 +89,12 @@ namespace Scaffoldinglab2.Controllers
                 return View(obj);
             }
         }
+        
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+
+            return RedirectToAction("Index", "Student");
+        }
     }
 }
