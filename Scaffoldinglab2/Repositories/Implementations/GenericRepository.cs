@@ -60,7 +60,7 @@ namespace Scaffoldinglab2.Repositories.Implementations
 
         public T GetById(int id)
         {
-            throw new NotImplementedException();
+            return context.Set<T>().Find(id);
         }
 
     
