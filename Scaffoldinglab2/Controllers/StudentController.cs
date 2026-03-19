@@ -8,7 +8,7 @@ using Scaffoldinglab2.Repositories.Interfaces;
 
 namespace Scaffoldinglab2.Controllers
 {
-    [Authorize]
+    [Authorize(Roles ="Admin")]
     public class StudentController : Controller
     {
         private readonly IRepositoryManager repository;
@@ -90,11 +90,13 @@ namespace Scaffoldinglab2.Controllers
             }
 
             var student = repository.StudentRepository.GetById(id);
+
             if (student == null)
             {
                 TempData["error"] = "mast be have not null ";
                 return RedirectToAction(nameof(Index));
             }
+
             //ViewBag.Teachers = context.Teachers.ToList();
 
             return View(student);
