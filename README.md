@@ -1,4 +1,7 @@
-# Scafflding-lab2
+# School management
+🚀 ASP.NET Core MVC Project
+
+📌 OverviewnrojectrojectchoolchoolSPSPSPchoolchool
 🚀 ASP.NET Core MVC Project
 
 📌 Overview
