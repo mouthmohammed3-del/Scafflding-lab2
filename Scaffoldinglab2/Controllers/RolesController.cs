@@ -35,7 +35,7 @@ namespace Scaffoldinglab2.Controllers
             var res = await roleManager.CreateAsync(role);
             if(res.Succeeded)
             {
-                return View("Index");
+                return RedirectToAction("Index");
             }
             return View(model:name);
         }

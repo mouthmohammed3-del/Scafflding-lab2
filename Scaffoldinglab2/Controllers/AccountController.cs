@@ -85,7 +85,7 @@ namespace Scaffoldinglab2.Controllers
                 }
 
             }catch (Exception ex)
-            {
+            { 
                 return View(obj);
             }
         }
