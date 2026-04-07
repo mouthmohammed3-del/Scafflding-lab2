@@ -1,0 +1,73 @@
+﻿@using Microsoft.AspNetCore.Identity;
+
+@model IEnumerable<UserVM>
+
+    <h1>Roles Index</h1>
+    <div class="container mt-5">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold text-primary">Students Management</h2>
+            <a asp-action="Create" class="btn btn-success shadow-sm">
+                <i class="bi bi-plus-circle"></i> Add New Student
+            </a>
+        </div>
+
+        @if (Model != null && Model.Any())
+    {
+        <div class="card shadow-lg border-0">
+            <div class="card-body">
+                <table class="table table-hover align-middle text-center">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>UserName</th>
+                            <th>FullName</th>
+                            <th>Address</th>
+
+                            <th width="250">Actions</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.UserName</td>
+                            <td>@item.FullName</td>
+                            <td>@item.Address</td>
+
+
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id"
+                                   class="btn btn-sm btn-primary me-2">
+                                    <i class="bi bi-pencil-square"></i> Edit
+                                </a>
+
+                                <a asp-action="Delete" asp-route-id="@item.Id"
+                                   class="btn btn-sm btn-danger me-2">
+                                    <i class="bi bi-trash"></i> Delete
+                                </a> 
+                                <a asp-action="Manage" asp-cntroller="Roles" asp-route-id="@item.Id"
+                                   class="btn btn-sm btn-danger me-2">
+                                    <i class="bi bi-trash"></i> Roles
+                                </a>
+
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info text-center shadow-sm">
+            <h5>No Students Found</h5>
+        </div>
+    }
+
+    </div>
+

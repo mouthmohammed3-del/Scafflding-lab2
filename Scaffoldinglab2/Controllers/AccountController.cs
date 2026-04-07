@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Scaffoldinglab2.Models;
 using Scaffoldinglab2.ViewModels;
 
@@ -14,6 +15,26 @@ namespace Scaffoldinglab2.Controllers
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+        }
+        public async Task<IActionResult> Index()
+        {
+
+            var users = await userManager.Users.ToListAsync();
+            List<UserVM> usersVMs = new List<UserVM>();
+            foreach(var u in users)
+            {
+
+                usersVMs.Add(new UserVM
+                {
+                    Id = u.Id,
+                    Address = u.Address,
+                    FullName = u.FullName,
+                    UserName = u.UserName
+                });
+                
+            }
+
+            return View();
         }
         [HttpGet]
         public IActionResult Login()

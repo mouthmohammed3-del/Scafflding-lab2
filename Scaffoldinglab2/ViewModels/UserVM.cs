@@ -4,6 +4,7 @@ namespace Scaffoldinglab2.ViewModels
 {
     public class UserVM
     {
+        public string Id { get; set; }
         [Required]
         public string FullName { get; set; } = null!;
         [Required]
