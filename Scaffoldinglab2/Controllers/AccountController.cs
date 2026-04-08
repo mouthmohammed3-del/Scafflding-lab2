@@ -34,7 +34,7 @@ namespace Scaffoldinglab2.Controllers
                 
             }
 
-            return View();
+            return View(usersVMs);
         }
         [HttpGet]
         public IActionResult Login()
