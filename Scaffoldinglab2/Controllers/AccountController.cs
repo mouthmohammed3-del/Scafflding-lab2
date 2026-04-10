@@ -91,7 +91,7 @@ namespace Scaffoldinglab2.Controllers
                 var res = await userManager.CreateAsync(user , obj.Password);
                 if (res.Succeeded)
                 {
-                    return RedirectToAction("Index", "Student");
+                    return RedirectToAction("Index", "Account");
                 }
                 else
                 {

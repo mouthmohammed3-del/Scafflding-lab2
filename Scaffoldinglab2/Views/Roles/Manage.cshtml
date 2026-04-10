@@ -1,0 +1,26 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@model UserRolesVM
+
+@if(Model != null)
+{
+    <h4>Id: @Model.UserId</h4>
+    <h1>Name: @Model.FullName</h1>
+    <h1>UserName: @Model.UserName</h1>
+    <form asp-action="Manage" method="post">
+        <div class="text-danger" asp-validation-summary="All"></div>
+        <input type ="hidden" asp-for="UserId"/>
+        <input type ="hidden" asp-for="FullName"/>
+        <input type ="hidden" asp-for="UserName"/>
+    @for (int i=0;i< Model.Roles.Count; i++)
+    {
+
+        <label asp-for="Roles[i].Checked">@Model.Roles[i].Name</label>
+        <input asp-for="Roles[i].Checked" />
+            <input type="hidden" asp-for="Roles[i].Name" />
+        <br />
+    }
+
+    <button class="btn btn-primary" type="submit" >Send</button>
+    </form>
+}
+

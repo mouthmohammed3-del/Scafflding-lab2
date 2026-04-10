@@ -7,7 +7,7 @@
 
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="fw-bold text-primary">Students Management</h2>
-            <a asp-action="Create" class="btn btn-success shadow-sm">
+            <a asp-action="Register" class="btn btn-success shadow-sm">
                 <i class="bi bi-plus-circle"></i> Add New User
             </a>
         </div>
@@ -47,8 +47,8 @@
                                 <a asp-action="Delete" asp-route-id="@item.Id"
                                    class="btn btn-sm btn-danger me-2">
                                     <i class="bi bi-trash"></i> Delete
-                                </a> 
-                                <a asp-action="Manage" asp-cntroller="Roles" asp-route-id="@item.Id"
+                                </a>
+                                    <a asp-action="Manage" asp-controller="Roles" asp-route-userid="@item.Id"
                                    class="btn btn-sm btn-danger me-2">
                                     <i class="bi bi-trash"></i> Roles
                                 </a>
